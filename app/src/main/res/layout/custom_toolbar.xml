@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="showBackIcon"
+            type="Boolean" />
+
+        <variable
+            name="showCheckIcon"
+            type="Boolean" />
+
+        <variable
+            name="showIcon"
+            type="Boolean" />
+
+        <variable
+            name="toolbarTitle"
+            type="String" />
+
+        <variable
+            name="isActiveSession"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="dp"
+            type="String" />
+        <variable
+            name="imageAvailable"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/img_arrow_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:contentDescription="@string/back_arrow_description"
+            android:src="@drawable/arrow_back"
+            android:visibility="@{showBackIcon? View.VISIBLE: View.GONE, default = visible}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/groupInitial"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            layout="@layout/profile_dp"
+            android:visibility="@{showBackIcon == false ? View.VISIBLE: View.GONE}"
+            bind:imageAvailable="@{imageAvailable}"
+            bind:dp="@{dp}"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_title"  />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/Toolbar_Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@{toolbarTitle}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/barrierGroupBottom"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Toolbar Title" />
+
+        <ImageView
+            android:id="@+id/img_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/checkmark_description"
+            android:visibility="@{showIcon? View.VISIBLE : View.GONE}"
+            android:clickable="@{isActiveSession ? showCheckIcon ? true : false : true, default = true}"
+            android:src="@{showCheckIcon? @drawable/ic_checkmark :isActiveSession? @drawable/broadcast_icon_public_disabled : @drawable/broadcast_icon_public}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/optionMenu"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/optionMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu"
+            android:padding="4dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/optionmenu"
+            app:layout_constraintBottom_toBottomOf="@id/img_done"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_done" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierGroupBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="img_arrow_back,groupInitial"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
