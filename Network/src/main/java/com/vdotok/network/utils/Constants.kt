@@ -1,5 +1,5 @@
 package com.vdotok.network.utils
 
 object Constants {
-    const val BASE_URL = "Please Enter API Service URl Here"
+    const val BASE_URL = "https://tenant.vdotok.com"
 }
