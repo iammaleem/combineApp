@@ -7,7 +7,7 @@ package com.vdotok.app.constants
  */
 
 //    SDK AUTH PARAMS
-const val SDK_PROJECT_ID = "11HUGUY"
+const val SDK_PROJECT_ID = "115G1WZI"
 
 
 //    GROUP CONSTANTS
